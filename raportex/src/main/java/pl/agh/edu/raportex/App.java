@@ -3,6 +3,7 @@ package pl.agh.edu.raportex;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 
 
@@ -34,10 +35,25 @@ public class App
 			}
 			switch (choice) {
 			case 1:
+				RaportGenerator rap1 = new RaportGenerator();
+				ArrayList<Raport1Record> report1List = rap1.makeRaportOne(records);
+				for (Raport1Record r : report1List) {
+					System.out.println(r.toCSVReport1String());
+				}
 				break;
 			case 2:
+				RaportGenerator rap2 = new RaportGenerator();
+				ArrayList<Raport2Record> report2List = rap2.makeRaporTwo(records);
+				for (Raport2Record r : report2List) {
+					System.out.println(r.toCSVReport1String());
+				}
 				break;
 			case 3:
+				RaportGenerator rap3 = new RaportGenerator();
+				ArrayList<Raport3Record> report3List = rap3.makeRaporThree(records);
+				for (Raport3Record r : report3List) {
+					System.out.println(r.toCSVReport1String());
+				}
 				break;
 			case 4:
 				for (Record r : records) {
@@ -59,7 +75,7 @@ public class App
     }
     private static void saveCsvQuery(ArrayList<Record> input, String path) {
 		String choice = "";
-    	while (!choice.equalsIgnoreCase("t")||choice.equalsIgnoreCase("n")) {
+    	while (!choice.equalsIgnoreCase("t")||!choice.equalsIgnoreCase("n")) {
     	System.out.println("Czy zapisac raport do pliku CSV? (t/n)"); 
 		choice = UserInput.readOneLine();
 		
@@ -67,8 +83,8 @@ public class App
 				ExportCSV.ExportCSVFromRecord(input, (path + "\\daneWejsRap.csv"));
 				System.out.println("Plik zapisany w: \n"+path+"\\daneWejsRap.csv");
 			} else if (choice.equalsIgnoreCase("n")) {
-			
-		} 
+				
+			} 
 		}
 	}
 }
